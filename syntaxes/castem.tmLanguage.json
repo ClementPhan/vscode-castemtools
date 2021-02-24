@@ -104,18 +104,6 @@
                     ]
                 }
             }
-        },
-		"line_continuation_character": {
-            "patterns": [
-                {
-                    "match": "(\\\\)\\n",
-                    "captures": {
-                        "1": {
-                            "name": "constant.character.escape.line-continuation.c"
-                        }
-                    }
-                }
-            ]
         }
 	}
 }
