@@ -1,0 +1,25 @@
+{
+    "name": "vscode-castemtools",
+    "displayName": "Castem Tools",
+    "description": "Add syntax highlighting for Castem",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "castem",
+            "aliases": ["Castem", "castem"],
+            "extensions": [".dgibi"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "castem",
+            "scopeName": "source.castem",
+            "path": "./syntaxes/castem.tmLanguage.json"
+        }]
+    }
+}
