@@ -1,32 +1,121 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Castem",
+	"scopeName": "source.castem",
 	"patterns": [
 		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#numbers"
 		}
 	],
 	"repository": {
 		"keywords": {
 			"patterns": [{
+				"name": "keyword.operator.castem",
+				"match": "(?i)\\b(et|ou)\\b"
+			},
+			{
 				"name": "keyword.control.castem",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+				"match": "(?i)\\b(si|sinon|finsi|repe|fin)\\b"
+			}
+			]
 		},
 		"strings": {
-			"name": "string.quoted.double.castem",
-			"begin": "\"",
-			"end": "\"",
+			"name": "string.quoted.single.castem",
+			"begin": "'",
+			"end": "'",
 			"patterns": [
 				{
 					"name": "constant.character.escape.castem",
 					"match": "\\\\."
 				}
 			]
-		}
-	},
-	"scopeName": "source.castem"
+		},
+		"comments": {
+			"name": "comment.line.punctuation.castem",
+			"match": "^\\*.*"
+			
+		},
+		"numbers": {
+            "match": "(?<!\\w)\\.?\\d(?:(?:[0-9eE\\.])|(?<=[eEpP])[+-])*",
+            "captures": {
+                "0": {
+                    "patterns": [
+                        {
+                            "begin": "(?=.)",
+                            "end": "$",
+                            "patterns": [
+                                {
+                                    "match": "(\\G(?=[0-9.]))([0-9](?:[0-9])*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9])*)?(([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9])*)))?$",
+                                    "captures": {
+                                        "2": {
+                                            "name": "constant.numeric.decimal.c"
+                                        },
+                                        "3": {
+                                            "name": "constant.numeric.decimal.point.c"
+                                        },
+                                        "4": {
+                                            "name": "constant.numeric.decimal.c"
+                                        },
+                                        "6": {
+                                            "name": "keyword.other.unit.exponent.decimal.c"
+                                        },
+                                        "7": {
+                                            "name": "keyword.operator.plus.exponent.decimal.c"
+                                        },
+                                        "8": {
+                                            "name": "keyword.operator.minus.exponent.decimal.c"
+                                        },
+                                        "9": {
+                                            "name": "constant.numeric.exponent.decimal.c"
+                                        }
+                                    }
+                                },
+                                {
+                                    "match": "(\\G(?=[0-9.]))([0-9](?:[0-9])*)(([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9])*)))?$",
+                                    "captures": {
+                                        "2": {
+                                            "name": "constant.numeric.decimal.c"
+                                        },
+                                        "4": {
+                                            "name": "keyword.other.unit.exponent.decimal.c"
+                                        },
+                                        "5": {
+                                            "name": "keyword.operator.plus.exponent.decimal.c"
+                                        },
+                                        "6": {
+                                            "name": "keyword.operator.minus.exponent.decimal.c"
+                                        },
+                                        "7": {
+                                            "name": "constant.numeric.exponent.decimal.c"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+		"line_continuation_character": {
+            "patterns": [
+                {
+                    "match": "(\\\\)\\n",
+                    "captures": {
+                        "1": {
+                            "name": "constant.character.escape.line-continuation.c"
+                        }
+                    }
+                }
+            ]
+        }
+	}
 }
